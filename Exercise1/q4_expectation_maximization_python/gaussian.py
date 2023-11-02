@@ -3,6 +3,11 @@ import math
 
 def ND(mean, covariance, x):
     K = len(mean)
+    
+    if covariance.shape[0] != covariance.shape[1]:
+        raise ValueError(f"Kovarianzmatrix ist nicht quadratisch: Dimension: {covariance.shape}, Kovarianzmatrix: {covariance}")
+
+    
     det_covariance = np.linalg.det(covariance)
     inv_covariance = np.linalg.inv(covariance) #  throws an error?
 

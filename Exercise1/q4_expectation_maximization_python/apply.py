@@ -24,9 +24,13 @@ print("Question: Expectation Maximization Algorithm for GMMs")
 
 # load datasets
 data = [[], [], []]
-data[0] = np.loadtxt("data1")
-data[1] = np.loadtxt("data2")
-data[2] = np.loadtxt("data3")
+
+import os
+print(os.getcwd())  
+
+data[0] = np.loadtxt(r"D:\UNI\Elements-of-Mashine-Learning-and-Data-Science\Exercise1\q4_expectation_maximization_python\data1")
+data[1] = np.loadtxt(r"D:\UNI\Elements-of-Mashine-Learning-and-Data-Science\Exercise1\q4_expectation_maximization_python\data2")
+data[2] = np.loadtxt(r"D:\UNI\Elements-of-Mashine-Learning-and-Data-Science\Exercise1\q4_expectation_maximization_python\data3")
 
 # test getLogLikelihood
 print("(a) testing getLogLikelihood function")

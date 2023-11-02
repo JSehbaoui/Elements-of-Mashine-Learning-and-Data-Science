@@ -19,4 +19,5 @@ def skinDetection(ndata, sdata, K, n_iter, epsilon, theta, img):
     # result        : Result of the detector for every image pixel
 
     #####Insert your code here for subtask 1g#####
+    pass
     return result

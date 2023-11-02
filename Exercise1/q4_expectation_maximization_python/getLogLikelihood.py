@@ -18,7 +18,7 @@ def getLogLikelihood(means, weights, covariances, X):
     # logLikelihood  : log-likelihood
 
     logLikelihood = 0
-    for x in X:
-        logLikelihood = sum([math.log(weight * ND(mean, covariance, x)) for mean, weight, covariance in zip(means, weights, covariances)])
+    for x in X: 
+        logLikelihood += sum([math.log(weight * ND(mean, covariance, x)) for mean, weight, covariance in zip(means, weights, covariances)])
     return logLikelihood
 
