@@ -1,6 +1,6 @@
 import numpy as np
+from gaussian import ND
 from getLogLikelihood import getLogLikelihood
-
 
 def EStep(means, covariances, weights, X):
     # Expectation step of the EM Algorithm
@@ -22,7 +22,6 @@ def EStep(means, covariances, weights, X):
     N = len(X)
     K = len(means)
     gamma = np.zeros((N, K))
-    logLikelihood = 0
     
     for n, x in enumerate(X):
         for j, (mean, covariance, weight) in enumerate(zip(means, covariances, weights)):
@@ -30,7 +29,6 @@ def EStep(means, covariances, weights, X):
             denominator = sum([weightK * ND(meanK, covarianceK, x) for meanK, covarianceK, weightK in zip(means, covariances, weights)])
             gamma[n, j] = numerator / denominator
             
-        # Compute log-likelihood
-        logLikelihood += np.log(np.sum(gamma[n, :]))
+
         
-    return [logLikelihood, gamma]
+    return [getLogLikelihood(means, weights, covariances, X), gamma]

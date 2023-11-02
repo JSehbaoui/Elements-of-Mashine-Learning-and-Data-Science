@@ -9,7 +9,7 @@ def ND(mean, covariance, x):
     if K <= 0:
         raise ValueError()
     
-    normalization_factor = 1 / (math.pow(2 * math.pi, K/2) * math.sqrt(det_cov))
-    exponent = np.matmul(np.matmul((x - mean).T, inv_cov), (x - mean))
+    normalization_factor = 1 / (math.pow(2 * math.pi, K/2) * math.sqrt(det_covariance))
+    exponent = np.matmul(np.matmul((x - mean).T, inv_covariance), (x - mean))
     
     return normalization_factor * math.exp(-0.5 * exponent)

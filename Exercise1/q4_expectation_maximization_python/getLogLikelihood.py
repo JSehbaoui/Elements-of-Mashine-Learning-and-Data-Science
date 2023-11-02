@@ -1,4 +1,7 @@
 import numpy as np
+import math
+from gaussian import ND
+
 def getLogLikelihood(means, weights, covariances, X):
     # Log Likelihood estimation
     #
