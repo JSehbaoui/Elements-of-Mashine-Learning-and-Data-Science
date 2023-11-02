@@ -8,9 +8,6 @@ import math
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import euclidean_distances
 
-def getColumn(list, n):
-    if n > np.shape(list)[1]: raise ValueError()
-    return [row[n] for row in list]
 
 def ND(mean, covariance, x):
     K = len(mean)
