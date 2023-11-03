@@ -24,11 +24,8 @@ def EStep(means, covariances, weights, X):
     gamma = np.zeros((N, K))
     
     for n, x in enumerate(X):
-        for j, (mean, covariance, weight) in enumerate(zip(means, covariances, weights)):
-            numerator = weight * multivariate_normal.pdf(x, mean, covariance)
-            denominator = sum([weightK * multivariate_normal.pdf(x, meanK, covariances[:, :, j]) for j, (meanK, weightK) in enumerate(zip(means, covariances, weights))])
-            gamma[n, j] = numerator / denominator
+        for k, (mean, weight) in enumerate(zip(means, weights)):
+            gamma[n, k] = weight * multivariate_normal.pdf(x, mean, covariances[:, :, k])
+        gamma[n] /= gamma[n].sum()
             
-
-        
     return [getLogLikelihood(means, weights, covariances, X), gamma]

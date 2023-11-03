@@ -34,12 +34,12 @@ def MStep(gamma, X):
         means[j] = np.sum(gamma[:, j].reshape(-1, 1) * X, axis=0) / NHat[j]
     
     # Calculate covariances
-    covariances = np.zeros((K, D, D))
+    covariances = np.zeros((D, D, K))
     for j in range(K):
         for n in range(N):
             diff = (X[n] - means[j]).reshape(-1, 1)
-            covariances[j] += gamma[n, j] * np.dot(diff, diff.T)
-        covariances[j] /= NHat[j]
+            covariances[:,:,j] += gamma[n, j] * np.dot(diff, diff.T)
+        covariances[:,:,j] /= NHat[j]
     
     logLikelihood = getLogLikelihood(means, weights, covariances, X)
     

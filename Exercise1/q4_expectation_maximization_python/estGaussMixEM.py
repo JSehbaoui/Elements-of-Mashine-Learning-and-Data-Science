@@ -26,7 +26,7 @@ def estGaussMixEM(data, K, n_iters, epsilon):
     # Initialize means and covariances using K-Means
     kmeans = KMeans(n_clusters=K, n_init=10).fit(data)
     means = kmeans.cluster_centers_
-    covariances = np.zeros((K, D, D))
+    covariances = np.zeros((D, D, K))
     
     # Create initial covariance matrices
     for j in range(K):
@@ -43,9 +43,10 @@ def estGaussMixEM(data, K, n_iters, epsilon):
         gamma = EStep(means, covariances, weights, data)[1]
         
         # M-Step
-        new_weights, new_means, new_covariances, logLikelihood = MStep(gamma, data)
+        new_weights, new_means, new_covariances, _ = MStep(gamma, data)
         
         new_covariances = [regularize_cov(covariance) for covariance in new_covariances]
+        new_covariances = [covariances[:, :, i] for i in range(covariances.shape[2])]
         
         # Update parameters
         weights, means, covariances = new_weights, new_means, new_covariances
