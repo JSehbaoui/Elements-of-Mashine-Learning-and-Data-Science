@@ -69,9 +69,9 @@ print("\n")
 print("(b) testing EStep function")
 # load gamma values
 testgamma = [[], [], []]
-testgamma[0] = np.loadtxt("gamma1")
-testgamma[1] = np.loadtxt("gamma2")
-testgamma[2] = np.loadtxt("gamma3")
+testgamma[0] = np.loadtxt(r"D:\UNI\Elements-of-Mashine-Learning-and-Data-Science\Exercise1\q4_expectation_maximization_python\gamma1")
+testgamma[1] = np.loadtxt(r"D:\UNI\Elements-of-Mashine-Learning-and-Data-Science\Exercise1\q4_expectation_maximization_python\gamma2")
+testgamma[2] = np.loadtxt(r"D:\UNI\Elements-of-Mashine-Learning-and-Data-Science\Exercise1\q4_expectation_maximization_python\gamma3")
 for idx in range(3):
     _, gamma = EStep(means, covariances, weights, data[idx])
     absdiff = testgamma[idx] - gamma

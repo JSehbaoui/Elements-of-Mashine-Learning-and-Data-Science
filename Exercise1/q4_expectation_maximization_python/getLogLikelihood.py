@@ -1,6 +1,5 @@
-import numpy as np
 import math
-from gaussian import ND
+from scipy.stats import multivariate_normal
 
 def getLogLikelihood(means, weights, covariances, X):
     # Log Likelihood estimation
@@ -16,9 +15,15 @@ def getLogLikelihood(means, weights, covariances, X):
     #
     # OUTPUT:
     # logLikelihood  : log-likelihood
-
+    
     logLikelihood = 0
     for x in X: 
-        logLikelihood += sum([math.log(weight * ND(mean, covariance, x)) for mean, weight, covariance in zip(means, weights, covariances)])
+       logLikelihood += math.log(
+           sum(
+               [weight * multivariate_normal.pdf(x, mean, covariances[:, :, j])
+                for j, (mean, weight) in enumerate(zip(means, weights))
+                ]
+               )
+           )
+       
     return logLikelihood
-
