@@ -1,5 +1,5 @@
 import numpy as np
-from gaussian import ND
+from scipy.stats import multivariate_normal
 from getLogLikelihood import getLogLikelihood
 
 def EStep(means, covariances, weights, X):
@@ -25,8 +25,8 @@ def EStep(means, covariances, weights, X):
     
     for n, x in enumerate(X):
         for j, (mean, covariance, weight) in enumerate(zip(means, covariances, weights)):
-            numerator = weight * ND(mean, covariance, x)
-            denominator = sum([weightK * ND(meanK, covarianceK, x) for meanK, covarianceK, weightK in zip(means, covariances, weights)])
+            numerator = weight * multivariate_normal.pdf(x, mean, covariance)
+            denominator = sum([weightK * multivariate_normal.pdf(x, meanK, covariances[:, :, j]) for j, (meanK, weightK) in enumerate(zip(means, covariances, weights))])
             gamma[n, j] = numerator / denominator
             
 
